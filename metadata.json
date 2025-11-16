@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Solana Asset Liberator",
+  "description": "A tool to swiftly migrate all your Solana assets (SOL and SPL Tokens) to a new wallet with a single signature. Exercise absolute control over your digital wealth.",
+  "requestFramePermissions": []
+}

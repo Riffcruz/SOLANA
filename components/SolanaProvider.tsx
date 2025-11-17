@@ -20,6 +20,11 @@ import {
     createDefaultWalletNotFoundHandler,
 } from '@solana-mobile/wallet-adapter-mobile';
 
+// WORKAROUND: Cast providers to `any` to bypass React 19 type incompatibility.
+// The Solana wallet adapter libraries are not yet updated for React 19's stricter component types.
+const ConnectionProviderAsAny = ConnectionProvider as any;
+const WalletProviderAsAny = WalletProvider as any;
+const WalletModalProviderAsAny = WalletModalProvider as any;
 
 interface SolanaProviderProps {
     children: ReactNode;
@@ -58,13 +63,13 @@ const SolanaProvider: React.FC<SolanaProviderProps> = ({ children }) => {
     );
 
     return (
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>
+        <ConnectionProviderAsAny endpoint={endpoint}>
+            <WalletProviderAsAny wallets={wallets} autoConnect>
+                <WalletModalProviderAsAny>
                     {children}
-                </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
+                </WalletModalProviderAsAny>
+            </WalletProviderAsAny>
+        </ConnectionProviderAsAny>
     );
 };
 
